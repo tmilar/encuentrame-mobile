@@ -40,7 +40,7 @@ buck-out/
 android/app/libs
 android/keystores/debug.keystore
 
-# .expo/
+.expo/
 
 
 # Created by https://www.gitignore.io/api/node,java,android,reactnative,webstorm+all,androidstudio,jetbrains+iml
