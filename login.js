@@ -1,15 +1,16 @@
 import React, {Component} from 'react'
-import {Text, View, StyleSheet, Button, Alert, TextInput} from 'react-native'
+import {Text, View, StyleSheet, Button, Alert, TextInput, AsyncStorage} from 'react-native'
+import UserService from './UserService';
 
 export default class Login extends Component {
 
-  state = {
-    userEmail: '',
-    password: ''
-  };
-
   constructor(props) {
     super(props);
+
+    this.state = {
+      userEmail: '',
+      password: ''
+    };
 
     this._clearForm = this._clearForm.bind(this);
     this._validateLogin = this._validateLogin.bind(this);
@@ -19,21 +20,36 @@ export default class Login extends Component {
   }
 
   _clearForm() {
-    this.state = {
+    this.setState({
       userEmail: '',
       password: ''
+    });
+  }
+
+  async _validateLogin() {
+
+    if (this.state.userEmail === '' || this.state.password === '') {
+      console.log("userEmail or password can't empty!");
+      return false;
     }
+
+    const credentials = {
+      email: this.state.userEmail,
+      password: this.state.password
+    };
+
+    let ok = await UserService.checkCredentials(credentials);
+
+    console.log(`Logged? ${!!ok} ->`, ok);
+
+    return ok;
   }
 
-  _validateLogin() {
-    return this.state.userEmail !== '' && this.state.password !== '';
-  }
-
-  _handleLoginButtonPress() {
-    if (!this._validateLogin()) {
+  async _handleLoginButtonPress() {
+    if (!await this._validateLogin()) {
       Alert.alert(
         'Error',
-        `Email o password incorrecto? ${this.state.userEmail} / ${this.state.password}`
+        `Email o password incorrecto?`
       );
       return;
     }
