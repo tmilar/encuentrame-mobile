@@ -30,8 +30,7 @@ export default class Login extends Component {
   async _validateLogin() {
 
     if (this.state.userEmail === '' || this.state.password === '') {
-      console.log("userEmail or password can't empty!");
-      return false;
+      throw "User email or password can't empty!";
     }
 
     const credentials = {
@@ -41,13 +40,16 @@ export default class Login extends Component {
 
     let result = await UserService.checkCredentials(credentials);
 
-    console.log(`Logged? ${!!result} ->`, result);
+    console.log(`Logged! ->`, result);
 
     return result;
   }
 
   async _handleLoginButtonPress() {
-    if (!await this._validateLogin()) {
+    try {
+      await this._validateLogin();
+    } catch (e) {
+      console.log("Login error: ", e);
       Alert.alert(
         'Error',
         `Email o password incorrecto?`

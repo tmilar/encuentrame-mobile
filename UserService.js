@@ -16,17 +16,14 @@ class UserService {
     let found = await this.findByEmail(user.email);
 
     if (!found) {
-      console.log(`El usuario '${user.email}' no esta registrado.`);
-      return false;
+      throw `El usuario '${user.email}' no esta registrado.`;
     }
 
     // Check password
     if (this.checkUserPassword(found, user.password)) {
-      console.log(`La contraseña ingresada para '${user.email}' es incorrecta.`);
-      return false;
+      throw `La contraseña ingresada para '${user.email}' es incorrecta.`;
     }
 
-    console.log(`Valid credentials! Welcome: `, found);
     return found;
   }
 
@@ -68,8 +65,6 @@ class UserService {
       delete this.initialUsers;
       await AsyncStorage.setItem("users", JSON.stringify(allUsers));
     }
-
-    console.log(`Found users total: ${allUsers ? allUsers.length : 0}.`);
 
     return allUsers;
   }
