@@ -74,6 +74,26 @@ class UserService {
     return allUsers;
   }
 
+  async registerUser(userData) {
+
+    if (!userData.email || userData.email === ''
+      || !userData.password || userData.password === '') {
+      throw `Por favor, ingrese un email y contraseñas válidos.`;
+    }
+
+    let existingUser = await this.findByEmail(userData.email);
+
+    if(existingUser) {
+      throw `El usuario '${userData.email}' ya existe.!`;
+    }
+
+    let storedUsers = await this.findAll();
+
+    storedUsers = [...storedUsers, userData];
+
+    console.log(`Registrado '${userData.email}' exitosamente! Users total: ${storedUsers.length}`);
+    return await AsyncStorage.setItem("users", JSON.stringify(storedUsers));
+  }
 }
 
 let userService = new UserService();
