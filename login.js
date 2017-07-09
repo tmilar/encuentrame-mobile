@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Text, View, StyleSheet, Button, Alert, TextInput, AsyncStorage} from 'react-native'
+import {Text, View, StyleSheet, Button, Alert, TextInput} from 'react-native'
 import UserService from './UserService';
 
 export default class Login extends Component {
@@ -17,6 +17,7 @@ export default class Login extends Component {
     this._handleEmailTextChange = this._handleEmailTextChange.bind(this);
     this._handlePasswordTextChange = this._handlePasswordTextChange.bind(this);
     this._handleLoginButtonPress = this._handleLoginButtonPress.bind(this);
+    this._handleRegisterButtonPress = this._handleRegisterButtonPress.bind(this);
   }
 
   _clearForm() {
@@ -70,6 +71,28 @@ export default class Login extends Component {
     this.setState({password: inputValue})
   }
 
+
+  async _handleRegisterButtonPress() {
+    const registerData = {
+      email: this.state.userEmail,
+      password: this.state.password
+    };
+
+    try {
+      await UserService.registerUser(registerData);
+      Alert.alert(
+        "Registro OK!",
+        `Bienvenido, ${registerData.email}`
+      );
+    } catch (e) {
+      console.log("Register error:", e);
+      Alert.alert(
+        "Error de registro",
+        `Hubo un problema: ${e}`
+      );
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -102,7 +125,7 @@ export default class Login extends Component {
         />
 
         <Text
-          onPress={() => Alert.alert("Registro", "coming soon...")}
+          onPress={this._handleRegisterButtonPress}
           style={{textDecorationLine: "underline"}}>
           No estoy registrado
         </Text>
