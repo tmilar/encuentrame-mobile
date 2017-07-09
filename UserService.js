@@ -3,7 +3,7 @@ import {AsyncStorage} from 'react-native'
 class UserService {
 
   constructor() {
-    this.users = [{
+    this.initialUsers = [{
       email: 'admin',
       password: 'admin'
     }];
@@ -13,7 +13,7 @@ class UserService {
    * Fetch registered users. Using local storage for now.
    */
   async checkCredentials(user) {
-    let found = await this.findUserByEmail(user.email);
+    let found = await this.findByEmail(user.email);
 
     if (!found) {
       console.log(`El usuario '${user.email}' no esta registrado.`);
@@ -41,8 +41,15 @@ class UserService {
     return user.password !== password;
   }
 
-  async findUserByEmail(userEmail) {
-    console.log(`Pre-set users: ${JSON.stringify(this.users)} (total: ${this.users ? this.users.length : 0}).`);
+  async findByEmail(userEmail) {
+    let allUsers = await this.findAll();
+
+    return allUsers.find(u => {
+      return u.email === userEmail;
+    });
+  }
+
+  async findAll() {
 
     let users;
     let storedUsersJson = await AsyncStorage.getItem("users");
@@ -53,13 +60,18 @@ class UserService {
       throw new Error("Problem parsing users!", e);
     }
 
-    let allUsers = [...this.users, ...users];
+    let allUsers = users;
+
+    if(this.initialUsers && this.initialUsers.length) {
+      // synchronize (first time only)
+      allUsers = [...this.initialUsers, ...users];
+      delete this.initialUsers;
+      await AsyncStorage.setItem("users", JSON.stringify(allUsers));
+    }
 
     console.log(`Found users total: ${allUsers ? allUsers.length : 0}.`);
 
-    return allUsers.find(u => {
-      return u.email === userEmail;
-    });
+    return allUsers;
   }
 
 }
