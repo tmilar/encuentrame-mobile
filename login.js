@@ -38,11 +38,11 @@ export default class Login extends Component {
       password: this.state.password
     };
 
-    let ok = await UserService.checkCredentials(credentials);
+    let result = await UserService.checkCredentials(credentials);
 
-    console.log(`Logged? ${!!ok} ->`, ok);
+    console.log(`Logged? ${!!result} ->`, result);
 
-    return ok;
+    return result;
   }
 
   async _handleLoginButtonPress() {
