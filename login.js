@@ -17,7 +17,7 @@ export default class Login extends Component {
     this._handleEmailTextChange = this._handleEmailTextChange.bind(this);
     this._handlePasswordTextChange = this._handlePasswordTextChange.bind(this);
     this._handleLoginButtonPress = this._handleLoginButtonPress.bind(this);
-    this._handleRegisterButtonPress = this._handleRegisterButtonPress.bind(this);
+    this._handleRegisterTextPress = this._handleRegisterTextPress.bind(this);
   }
 
   _clearForm() {
@@ -73,30 +73,21 @@ export default class Login extends Component {
     this.setState({password: inputValue})
   }
 
+  _handleRegisterTextPress() {
+    const {navigate} = this.props.navigation;
+    const self = this;
 
-  async _handleRegisterButtonPress() {
-    const registerData = {
-      email: this.state.userEmail,
-      password: this.state.password
-    };
-
-    try {
-      await UserService.registerUser(registerData);
-      Alert.alert(
-        "Registro OK!",
-        `Bienvenido, ${registerData.email}`
-      );
-    } catch (e) {
-      console.log("Register error:", e);
-      Alert.alert(
-        "Error de registro",
-        `Hubo un problema: ${e}`
-      );
-    }
+    navigate('Register', {
+      form: this.state,
+      onDone: (userEmail) => {
+        self.setState({userEmail});
+      }
+    })
   }
 
   static navigationOptions = {
-    title: 'Login'
+    title: 'Login',
+    // header: null
   };
 
   render() {
@@ -131,7 +122,7 @@ export default class Login extends Component {
         />
 
         <Text
-          onPress={this._handleRegisterButtonPress}
+          onPress={this._handleRegisterTextPress}
           style={{textDecorationLine: "underline"}}>
           No estoy registrado
         </Text>
