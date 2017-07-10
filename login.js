@@ -95,6 +95,10 @@ export default class Login extends Component {
     }
   }
 
+  static navigationOptions = {
+    title: 'Login'
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -105,7 +109,7 @@ export default class Login extends Component {
         <TextInput
           value={this.state.userEmail}
           placeholder="E-mail"
-          style={{width: 200, height: 44, padding: 8}}
+          style={styles.textInput}
           keyboardType="email-address"
           selectTextOnFocus
           onChangeText={this._handleEmailTextChange}
@@ -114,7 +118,7 @@ export default class Login extends Component {
         <TextInput
           value={this.state.password}
           placeholder="Contraseña"
-          style={{width: 200, height: 44, padding: 8}}
+          style={styles.textInput}
           secureTextEntry
           returnKeyType="done"
           onChangeText={this._handlePasswordTextChange}
@@ -149,5 +153,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#34495e'
+  },
+  textInput: {
+    width: 200,
+    height: 44,
+    padding: 8
   }
 });
