@@ -1,12 +1,10 @@
-import React from 'react';
-import {StackNavigator} from 'react-navigation';
-import Login from './app/screen/Login';
-import Register from './app/screen/Register';
+import React, { Component } from 'react';
+import { Root } from './app/config/router';
 
-
-const App = StackNavigator({
-  Login: {screen: Login, navigationOptions: {header: null}},
-  Register: {screen: Register}
-});
+class App extends Component {
+  render() {
+    return <Root />;
+  }
+}
 
 export default App;
