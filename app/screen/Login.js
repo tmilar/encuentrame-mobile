@@ -62,7 +62,8 @@ export default class Login extends Component {
       `Bienvenido, ${this.state.userEmail}!`
     );
 
-    this._clearForm()
+    this._clearForm();
+    this._goToHome();
   }
 
   _handleEmailTextChange(inputValue) {
@@ -89,6 +90,11 @@ export default class Login extends Component {
     title: 'Login',
     // header: null
   };
+
+  _goToHome() {
+    const {navigate} = this.props.navigation;
+    navigate('PostLogin');
+  }
 
   render() {
     return (
