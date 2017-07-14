@@ -1,14 +1,19 @@
 import React, {Component} from 'react'
-import {Text, View, StyleSheet, Button, Alert, TextInput} from 'react-native'
+import {Text, View, StyleSheet, Button, Alert, TextInput, ScrollView} from 'react-native'
+import Feed from "../component/Feed";
+import {news, users} from "../config/data";
 
 export default class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView>
+        {/* TODO add styles.container for scroll view?*/}
         <Text style={styles.paragraph}>
           Bienvenido al Home!
         </Text>
-      </View>
+        <Feed users={users} news={news}>
+        </Feed>
+      </ScrollView>
     )
   }
 }
