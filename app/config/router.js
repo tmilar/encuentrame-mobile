@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {StackNavigator, TabNavigator, TabBarBottom} from 'react-navigation';
+import {StackNavigator, TabNavigator} from 'react-navigation';
 import Login from '../screen/Login';
 import Register from '../screen/Register';
 import {Icon} from 'react-native-elements';
