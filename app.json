@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "18.0.0",
     "name": "Encuentrame",
-    "icon": "./img/eme_icon.png",
+    "icon": "./app/img/eme_icon.png",
     "version": "1.0.0",
     "slug": "encuentrame",
     "ios": {

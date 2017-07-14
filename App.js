@@ -1,7 +1,7 @@
 import React from 'react';
 import {StackNavigator} from 'react-navigation';
-import Login from './login';
-import Register from './Register';
+import Login from './app/screen/Login';
+import Register from './app/screen/Register';
 
 
 const App = StackNavigator({

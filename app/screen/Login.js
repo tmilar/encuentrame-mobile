@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Text, View, StyleSheet, Button, Alert, TextInput} from 'react-native'
-import UserService from './UserService';
+import UserService from '../service/UserService';
 
 export default class Login extends Component {
 
