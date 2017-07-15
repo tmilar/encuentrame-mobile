@@ -3,17 +3,26 @@ import {Text, View, StyleSheet, Button, Alert, TextInput, ScrollView} from 'reac
 import Feed from "../component/Feed";
 import {news, users} from "../config/data";
 
+import {Icon} from 'react-native-elements';
+import ActionButton from "react-native-action-button";
+
 export default class Home extends Component {
   render() {
     return (
-      <ScrollView>
-        {/* TODO add styles.container for scroll view?*/}
-        <Text style={styles.paragraph}>
-          Bienvenido al Home!
-        </Text>
-        <Feed users={users} news={news}>
-        </Feed>
-      </ScrollView>
+      <View>
+        <ScrollView>
+          {/* TODO add styles.container for scroll view?*/}
+          <Text style={styles.paragraph}>
+            Bienvenido al Home!
+          </Text>
+          <Feed users={users} news={news}>
+          </Feed>
+        </ScrollView>
+        <ActionButton buttonColor="rgba(231,76,60,1)"
+                      onPress={() => Alert.alert("Seguime", "Seguimiento activado \uD83D\uDE00 \uF44D")}
+                      icon={(<Icon name="person-pin-circle" color="white" size={26}/>)}>
+        </ActionButton>
+      </View>
     )
   }
 }
