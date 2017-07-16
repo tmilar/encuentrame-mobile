@@ -17,21 +17,6 @@ class Feed extends Component {
   }
 
   render() {
-    return (
-      <List>
-        {this.state.users.map((user) => (
-          <ListItem
-            key={user.login.username}
-            roundAvatar
-            avatar={{uri: user.picture.thumbnail}}
-            title={`${user.name.first.toUpperCase()} ${user.name.last.toUpperCase()}`}
-            subtitle={user.email}
-            onPress={() => console.log("Pressed on: ", user.name)}
-          />
-        ))}
-      </List>
-    );
-
     const newsItems = this.state.news.map((n, i) => {
       return (
         <Card key={i} containerStyle={{padding: 5}}>
@@ -68,7 +53,6 @@ class Feed extends Component {
     return newsListView;
   }
 }
-
 
 
 export default Feed;
