@@ -9,8 +9,8 @@ import ActionButton from "react-native-action-button";
 export default class Home extends Component {
   render() {
     return (
-      <View>
-        <ScrollView>
+      <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1.8 }}>
           {/* TODO add styles.container for scroll view?*/}
           <Text style={styles.paragraph}>
             Bienvenido al Home!
@@ -18,8 +18,9 @@ export default class Home extends Component {
           <Feed users={users} news={news}>
           </Feed>
         </ScrollView>
-        <ActionButton buttonColor="rgba(231,76,60,1)"
-                      onPress={() => Alert.alert("Seguime", "Seguimiento activado \uD83D\uDE00 \uF44D")}
+        <ActionButton style={{ flex: 0.2 }}
+                      buttonColor="rgba(231,76,60,1)"
+                      onPress={() => Alert.alert("Seguime", "Seguimiento activado \uD83D\uDE00")}
                       icon={(<Icon name="person-pin-circle" color="white" size={26}/>)}>
         </ActionButton>
       </View>
