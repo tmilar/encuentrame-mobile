@@ -4,15 +4,13 @@ import {Image, Text, View, StyleSheet} from "react-native";
 
 class Feed extends Component {
   state = {
-    news: [],
-    users: []
+    news: []
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      news: this.props.news,
-      users: this.props.users
+      news: this.props.news
     }
   }
 
